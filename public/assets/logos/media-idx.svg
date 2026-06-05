@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 42" role="img" aria-label="IDX Channel">
+  <rect width="170" height="42" fill="none"/>
+  <g transform="translate(8 6)" fill="none" stroke="#d71920" stroke-width="2">
+    <circle cx="17" cy="17" r="15"/>
+    <path d="M2 17h30M17 2c8 7 8 23 0 30M17 2c-8 7-8 23 0 30M6 9c8 4 18 4 26 0M6 25c8-4 18-4 26 0"/>
+  </g>
+  <text x="46" y="23" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" fill="#7f8796">IDX</text>
+  <text x="49" y="34" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="800" letter-spacing="1.2" fill="#7f8796">CHANNEL</text>
+</svg>

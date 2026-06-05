@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 42" role="img" aria-label="VIVA.co.id">
+  <rect width="150" height="42" fill="none"/>
+  <path d="M13 12l9 18 9-18h-7l-2 6-3-6z" fill="#f03ca5"/>
+  <path d="M36 12h8v18h-8z" fill="#70db45"/>
+  <path d="M49 30l10-18 10 18h-8l-2-5-2 5z" fill="#ffcc33"/>
+  <path d="M74 30l10-18 10 18h-8l-2-5-2 5z" fill="#2cb7f6"/>
+  <circle cx="102" cy="27" r="3" fill="#fff"/>
+  <text x="110" y="28" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#f8fbff">co.id</text>
+</svg>

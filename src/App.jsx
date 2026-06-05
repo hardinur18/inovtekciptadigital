@@ -47,6 +47,33 @@ const routeMap = {
   contact: "contact"
 };
 
+const pressLogos = [
+  { name: "VIVA.co.id", src: "assets/logos/media-viva.svg" },
+  { name: "Liputan 6", src: "assets/logos/media-liputan6.svg" },
+  { name: "IDX Channel", src: "assets/logos/media-idx.svg" },
+  { name: "Times Indonesia", src: "assets/logos/media-times.svg" },
+  { name: "SINDOnews", src: "assets/logos/media-sindo.svg" }
+];
+
+const clientLogos = [
+  { name: "Theta Institute", src: "assets/logos/client-theta-institute.svg" },
+  { name: "Studi DevSecVOps", src: "assets/logos/client-devsecvops.svg" },
+  { name: "Montessori Indonesia", src: "assets/logos/client-montessori.svg" },
+  { name: "Theta Group", src: "assets/logos/client-theta-group.svg" },
+  { name: "Sanga Sanga", src: "assets/logos/client-sanga.svg" },
+  { name: "Temika", src: "assets/logos/client-temika.svg" },
+  { name: "Upsekil", src: "assets/logos/client-upsekil.svg" },
+  { name: "Dara Luxury", src: "assets/logos/client-dara.svg" }
+];
+
+const techLogos = [
+  { name: "Next.js", src: "assets/logos/tech-next.svg" },
+  { name: "PHP", src: "assets/logos/tech-php.svg" },
+  { name: "WordPress", src: "assets/logos/tech-wordpress.svg" },
+  { name: "PostgreSQL", src: "assets/logos/tech-postgresql.svg" },
+  { name: "MySQL", src: "assets/logos/tech-mysql.svg" }
+];
+
 const iconMap = {
   "arrow-left": ArrowLeft,
   "arrow-right": ArrowRight,
@@ -446,7 +473,9 @@ function HomeView() {
             <div className="press-row">
               <span>Sudah diliput oleh media nasional</span>
               <div className="press-logos" aria-label="Media dan klien">
-                {["VIVA.co.id", "Liputan 6", "IDX Channel", "Times Indonesia", "Tech Daily"].map((item) => <b key={item}>{item}</b>)}
+                {pressLogos.map((item, index) => (
+                  <img key={item.name} src={item.src} alt={item.name} style={{ "--i": index }} />
+                ))}
               </div>
             </div>
           </div>
@@ -480,12 +509,18 @@ function HeroVisual() {
 }
 
 function ClientStrip() {
-  const clients = ["Theta Institute", "Blakc Brand", "Montessori Indonesia", "Perintis Group", "Sanga Sanga", "Temika", "Upsekil", "Dara Luxury"];
+  const marqueeItems = [...clientLogos, ...clientLogos];
   return (
     <section className="client-strip">
       <div className="section-shell slim">
         <p className="eyebrow center">Dipercaya oleh klien nasional</p>
-        <div className="client-marquee">{[...clients, ...clients].map((item, index) => <span key={`${item}-${index}`}>{item}</span>)}</div>
+        <div className="client-marquee" aria-label="Logo klien nasional">
+          {marqueeItems.map((item, index) => (
+            <span key={`${item.name}-${index}`}>
+              <img src={item.src} alt={index < clientLogos.length ? item.name : ""} />
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -504,7 +539,11 @@ function SplitSection() {
           <h2>Inovtek akan mewujudkan website impian Anda</h2>
           <p>Kami akan buatkan website profesional yang disesuaikan dengan kebutuhan Anda agar bisnis makin mudah dan kredibel. Semua proses dibuat transparan dan terukur.</p>
           <div className="tech-row" aria-label="Teknologi">
-            {["Next.js", "PHP", "WordPress", "PostgreSQL", "MySQL"].map((item) => <span key={item}>{item}</span>)}
+            {techLogos.map((item, index) => (
+              <span key={item.name} style={{ "--i": index }}>
+                <img src={item.src} alt={item.name} />
+              </span>
+            ))}
           </div>
         </div>
       </div>

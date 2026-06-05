@@ -17,6 +17,7 @@ pnpm-debug.log*
 /etinion-*.png
 /etinion-*.json
 /local-*.png
+/logo-*.png
 /mobile-*.png
 /next-*.png
 /test-*.png

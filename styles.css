@@ -640,6 +640,7 @@ h3 {
 
 .press-row {
   margin-top: 34px;
+  width: min(680px, calc(100vw - 48px));
 }
 
 .press-row span {
@@ -659,10 +660,21 @@ h3 {
   align-items: center;
 }
 
-.press-logos b {
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 15px;
-  font-weight: 700;
+.press-logos img {
+  display: block;
+  width: auto;
+  height: 27px;
+  max-width: 138px;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: pressLogoIn 0.54s ease forwards;
+  animation-delay: calc(var(--i) * 0.09s + 0.1s);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.12));
+}
+
+.press-logos img:hover {
+  transform: translateY(-1px);
 }
 
 .hero-visual {
@@ -849,26 +861,41 @@ h3 {
 
 .client-strip {
   background: #fff;
-  padding: 62px 0 46px;
+  padding: 66px 0 56px;
+}
+
+.client-strip .section-shell.slim {
+  overflow: hidden;
 }
 
 .client-marquee {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 18px;
-  margin-top: 26px;
+  width: max-content;
+  display: flex;
+  gap: 44px;
+  margin-top: 38px;
   align-items: center;
-  animation: clientFloat 14s ease-in-out infinite;
+  will-change: transform;
+  animation: clientMarquee 28s linear infinite;
+}
+
+.client-marquee:hover {
+  animation-play-state: paused;
 }
 
 .client-marquee span {
-  min-height: 54px;
+  width: 178px;
+  min-height: 70px;
   display: grid;
   place-items: center;
   border: 1px solid transparent;
-  color: #27364f;
-  font-weight: 900;
   background: #fff;
+}
+
+.client-marquee img {
+  display: block;
+  width: 100%;
+  max-height: 60px;
+  object-fit: contain;
 }
 
 .split-section,
@@ -980,7 +1007,6 @@ h3 {
   color: var(--muted);
 }
 
-.tech-row,
 .feature-pills {
   display: flex;
   flex-wrap: wrap;
@@ -988,7 +1014,37 @@ h3 {
   margin-top: 28px;
 }
 
-.tech-row span,
+.tech-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 28px;
+  align-items: center;
+}
+
+.tech-row span {
+  width: 94px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--btn-border-soft);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fff, #fbfdff);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 12px 24px rgba(12, 24, 48, 0.06);
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  animation: techLogoIn 0.52s ease forwards;
+  animation-delay: calc(var(--i) * 0.08s + 0.12s);
+}
+
+.tech-row img {
+  display: block;
+  width: 100%;
+  max-height: 48px;
+  object-fit: contain;
+}
+
 .feature-pills span {
   min-height: 44px;
   display: inline-flex;
@@ -2361,12 +2417,26 @@ textarea:focus {
   }
 }
 
-@keyframes clientFloat {
-  0%, 100% {
+@keyframes pressLogoIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes clientMarquee {
+  from {
     transform: translateX(0);
   }
-  50% {
-    transform: translateX(-18px);
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes techLogoIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -3022,14 +3092,23 @@ textarea:focus {
   }
 
   .press-logos {
-    gap: 8px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 18px;
+    margin: 0 -16px;
+    padding: 0 16px 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
 
-  .press-logos b {
-    padding: 4px 8px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.08);
-    font-size: 10px;
+  .press-logos::-webkit-scrollbar {
+    display: none;
+  }
+
+  .press-logos img {
+    flex: 0 0 auto;
+    height: 25px;
+    max-width: 138px;
   }
 
   .hero-visual {
@@ -3086,15 +3165,9 @@ textarea:focus {
   }
 
   .client-marquee {
-    display: flex;
-    grid-template-columns: none;
-    gap: 10px;
-    margin: 18px -16px 0;
-    padding: 0 16px 4px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    animation: none;
-    scrollbar-width: none;
+    gap: 36px;
+    margin: 22px 0 0;
+    animation-duration: 22s;
   }
 
   .client-marquee::-webkit-scrollbar {
@@ -3102,15 +3175,12 @@ textarea:focus {
   }
 
   .client-marquee span {
-    flex: 0 0 148px;
-    min-height: 46px;
-    padding: 0 12px;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    background: #fff;
-    font-size: 11px;
-    text-align: center;
-    scroll-snap-align: start;
+    width: 150px;
+    min-height: 52px;
+  }
+
+  .client-marquee img {
+    max-height: 44px;
   }
 
   .split-section,
@@ -3178,13 +3248,27 @@ textarea:focus {
     font-size: 14px;
   }
 
-  .tech-row,
   .feature-pills {
     gap: 8px;
     margin-top: 18px;
   }
 
-  .tech-row span,
+  .tech-row {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .tech-row span {
+    width: 72px;
+    height: 62px;
+    padding: 8px;
+    border-radius: 14px;
+  }
+
+  .tech-row img {
+    max-height: 42px;
+  }
+
   .feature-pills span {
     min-height: 36px;
     padding: 0 12px;
