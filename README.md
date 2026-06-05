@@ -17,6 +17,14 @@ Lalu buka `http://127.0.0.1:5173/#home`.
 npm run build
 ```
 
+Output production dibuat ke folder `out`, cocok untuk Cloudflare Pages.
+
+## Cloudflare Pages
+
+- Build command: `npm run build`
+- Build output directory: `out`
+- Production branch: `development`
+
 ## Catatan
 
 - Asset logo Inovtek tersimpan di `public/assets` dan `assets`.
