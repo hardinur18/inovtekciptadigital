@@ -495,14 +495,23 @@ function HomeView() {
 function HeroVisual() {
   return (
     <div className="hero-visual" aria-label="Preview dashboard dan website">
+      <div className="visual-glow glow-a" aria-hidden="true" />
+      <div className="visual-glow glow-b" aria-hidden="true" />
       <div className="metric-card top"><strong>500+</strong><span>Projek Website</span></div>
-      <div className="phone-mock small"><div className="phone-bar" /><div className="ticket-line" /><div className="ticket-line short" /><div className="mini-chart" /></div>
+      <div className="phone-mock small">
+        <div className="phone-bar" />
+        <div className="ticket-line" />
+        <div className="ticket-line short" />
+        <div className="mini-chart"><span /><span /></div>
+      </div>
       <div className="phone-mock main">
-        <div className="progress-ring">78%</div>
+        <div className="progress-ring"><span>78%</span></div>
         <div className="chip-row"><span /><span /><span /></div>
         <div className="bar-chart"><span /><span /><span /><span /></div>
       </div>
-      <div className="phone-mock dark-phone"><div className="app-grid"><span /><span /><span /><span /><span /><span /></div></div>
+      <div className="phone-mock dark-phone">
+        <div className="app-grid"><span /><span /><span /><span /><span /><span /></div>
+      </div>
       <div className="metric-card bottom"><strong>98%</strong><span>Client satisfaction</span></div>
     </div>
   );
@@ -531,8 +540,17 @@ function SplitSection() {
     <section className="split-section">
       <div className="section-shell split-grid">
         <div className="showcase-stack" aria-label="Tumpukan contoh website">
-          <div className="web-preview preview-a"><div className="browser-bar" /><div className="preview-hero" /><div className="preview-grid" /></div>
-          <div className="web-preview preview-b"><div className="browser-bar red" /><div className="shop-banner" /><div className="shop-grid" /></div>
+          <div className="web-preview preview-a">
+            <div className="browser-bar" />
+            <div className="preview-hero"><span /></div>
+            <div className="preview-lines"><span /><span /></div>
+            <div className="preview-grid"><span /><span /><span /></div>
+          </div>
+          <div className="web-preview preview-b">
+            <div className="browser-bar red" />
+            <div className="shop-banner" />
+            <div className="shop-grid"><span /><span /><span /><span /></div>
+          </div>
         </div>
         <div className="section-copy">
           <p className="eyebrow">Profesional website</p>
