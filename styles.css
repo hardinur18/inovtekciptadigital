@@ -275,7 +275,7 @@ svg {
   border-radius: 16px;
   min-height: 54px;
   padding: 0 26px;
-  font-weight: 800;
+  font-weight: 600;
   border: 1px solid rgba(37, 99, 235, 0.18);
   outline: 0;
   position: relative;
@@ -422,7 +422,7 @@ svg {
   background: var(--red);
   min-height: 44px;
   margin-bottom: 10px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .mobile-login.subtle {
@@ -1402,7 +1402,7 @@ h3 {
   border: 1px solid rgba(37, 99, 235, 0.18);
   background: linear-gradient(135deg, var(--btn-blue-a), var(--btn-blue-b));
   color: #fff;
-  font-weight: 900;
+  font-weight: 600;
   background-clip: padding-box;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 18px rgba(37, 99, 235, 0.13);
 }
@@ -3044,6 +3044,7 @@ textarea::placeholder {
     min-height: 48px;
     margin: 0;
     color: #fff;
+    font-weight: 600;
     border-radius: 16px;
     border: 1px solid rgba(37, 99, 235, 0.18);
     background: linear-gradient(135deg, var(--btn-blue-a), var(--btn-blue-b));
