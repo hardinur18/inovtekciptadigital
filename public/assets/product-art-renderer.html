@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inovtek Product Art Renderer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 100%; min-height: 100%; font-family: Poppins, sans-serif; background: #eef4ff; }
+      body { display: grid; place-items: center; overflow: hidden; }
+      .canvas { position: relative; overflow: hidden; background: #f3ecff; color: #111827; }
+      .cover { width: 1600px; height: 900px; padding: 74px 90px; background:
+        radial-gradient(circle at 85% 25%, rgba(59, 130, 246, .22), transparent 28%),
+        linear-gradient(135deg, #f7edff, #e8f7ff); }
+      .dashboard { width: 1600px; height: 900px; padding: 54px; background: #edf4ff; }
+      .features { width: 1600px; height: 900px; padding: 64px 84px; background:
+        radial-gradient(circle at 12% 20%, rgba(21, 152, 247, .12), transparent 26%),
+        linear-gradient(135deg, #f9f3ff, #ecfbff); }
+      .icon { width: 600px; height: 600px; display: grid; place-items: center; background:
+        linear-gradient(135deg, #041f3d, #0b63b8 58%, #1598f7); color: white; }
+      .brand { display: inline-flex; gap: 14px; align-items: center; font-size: 34px; font-weight: 600; }
+      .brand img { width: 58px; height: 58px; border-radius: 14px; box-shadow: 0 16px 36px rgba(4,31,61,.20); }
+      .title { margin: 36px 0 0; font-size: 78px; line-height: 1.08; font-weight: 800; letter-spacing: 0; }
+      .subtitle { margin: 24px 0 0; max-width: 760px; font-size: 30px; line-height: 1.35; color: #4b5870; }
+      .logo-row { display: flex; gap: 26px; align-items: center; margin-top: 42px; color: #232b3a; }
+      .logo-pill { border-radius: 999px; padding: 14px 24px; background: rgba(255,255,255,.72); border: 1px solid rgba(148,163,184,.35); font-size: 28px; font-weight: 700; }
+      .ui-stack { position: absolute; right: 90px; bottom: 76px; width: 670px; height: 520px; }
+      .browser { position: absolute; inset: 0; border-radius: 24px; background: white; border: 1px solid #d5e1ef; box-shadow: 0 34px 84px rgba(15, 23, 42, .18); overflow: hidden; }
+      .browser::before { content: ""; display: block; height: 58px; background: #eef3fb; border-bottom: 1px solid #dbe5f1; }
+      .hero-img { position: absolute; left: 36px; top: 96px; right: 36px; height: 132px; border-radius: 18px; background: linear-gradient(135deg, #2563eb, #8b5cf6); }
+      .white-card { position: absolute; left: 36px; bottom: 36px; width: 250px; height: 168px; border-radius: 18px; background: #f8fbff; border: 1px solid #e2e8f0; }
+      .white-card.two { left: 320px; width: 294px; }
+      .phone { position: absolute; right: -32px; top: 100px; width: 190px; height: 360px; border-radius: 34px; background: #111827; padding: 16px; box-shadow: 0 30px 70px rgba(15,23,42,.25); }
+      .phone-screen { width: 100%; height: 100%; border-radius: 26px; background: linear-gradient(#eff6ff, #fff); padding: 22px; }
+      .phone-line { height: 20px; border-radius: 999px; background: #c7d2fe; margin-bottom: 18px; }
+      .phone-card { height: 86px; border-radius: 18px; background: linear-gradient(135deg, #93c5fd, #ddd6fe); margin-bottom: 16px; }
+      .feature-badge { position: absolute; display: inline-flex; align-items: center; gap: 12px; min-height: 70px; padding: 0 24px; border-radius: 16px; color: white; background: #0f172a; font-size: 21px; font-weight: 700; box-shadow: 0 18px 40px rgba(15,23,42,.20); }
+      .feature-badge.a { right: 430px; top: 210px; background: #16a34a; }
+      .feature-badge.b { right: 60px; top: 175px; background: #0f172a; }
+      .feature-badge.c { right: 510px; bottom: 95px; background: #2563eb; }
+      .dash-shell { width: 100%; height: 100%; border-radius: 28px; background: white; border: 1px solid #d8e2ee; box-shadow: 0 30px 90px rgba(15,23,42,.15); display: grid; grid-template-columns: 250px 1fr; overflow: hidden; }
+      .sidebar { background: #0f172a; padding: 36px 28px; color: white; }
+      .side-logo { font-size: 30px; font-weight: 800; margin-bottom: 46px; }
+      .side-nav { display: grid; gap: 18px; }
+      .side-nav span { height: 46px; border-radius: 14px; background: rgba(255,255,255,.09); }
+      .dash-main { padding: 40px; background: #f8fbff; }
+      .dash-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 34px; }
+      .dash-head h1 { margin: 0; font-size: 42px; }
+      .search { width: 360px; height: 52px; border-radius: 999px; background: white; border: 1px solid #e2e8f0; }
+      .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-bottom: 26px; }
+      .stat { min-height: 150px; border-radius: 20px; background: white; border: 1px solid #e2e8f0; padding: 24px; }
+      .stat b { display: block; font-size: 32px; margin-top: 34px; }
+      .chart { height: 330px; border-radius: 22px; background: white; border: 1px solid #e2e8f0; padding: 36px; display: flex; align-items: end; gap: 18px; }
+      .chart span { flex: 1; border-radius: 12px 12px 0 0; background: linear-gradient(180deg, #2563eb, #93c5fd); }
+      .chart span:nth-child(1){height:50%}.chart span:nth-child(2){height:76%}.chart span:nth-child(3){height:58%}.chart span:nth-child(4){height:88%}.chart span:nth-child(5){height:63%}.chart span:nth-child(6){height:92%}
+      .feature-title { text-align: center; font-size: 64px; line-height: 1.1; font-weight: 800; margin: 0 auto 46px; max-width: 960px; }
+      .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+      .feature { min-height: 210px; border-radius: 22px; padding: 32px; background: rgba(255,255,255,.82); border: 1px solid #dfe7f2; }
+      .feature strong { display: block; font-size: 28px; margin: 22px 0 10px; }
+      .feature p { margin: 0; color: #526079; font-size: 20px; line-height: 1.35; }
+      .dot { width: 54px; height: 54px; border-radius: 16px; background: linear-gradient(135deg, #041f3d, #1598f7); }
+      .icon strong { font-size: 144px; line-height: 1; letter-spacing: -4px; }
+      .screen { width: 1600px; height: 900px; padding: 46px; background:
+        radial-gradient(circle at 86% 16%, rgba(21, 152, 247, .12), transparent 24%),
+        radial-gradient(circle at 10% 84%, rgba(37, 99, 235, .12), transparent 28%),
+        #eff5ff; }
+      .screen-shell { height: 100%; border-radius: 28px; overflow: hidden; border: 1px solid #d8e2ee; background: white; box-shadow: 0 30px 90px rgba(15,23,42,.14); display: grid; grid-template-columns: 244px 1fr; }
+      .screen-sidebar { padding: 34px 26px; background: #0f172a; color: white; }
+      .screen-logo { display: flex; align-items: center; gap: 12px; font-size: 25px; font-weight: 800; margin-bottom: 38px; }
+      .screen-logo img { display: block; width: 42px; height: 42px; border-radius: 12px; }
+      .screen-nav { display: grid; gap: 13px; }
+      .screen-nav span { height: 42px; border-radius: 12px; background: rgba(255,255,255,.08); }
+      .screen-nav span:first-child { background: linear-gradient(135deg, #2563eb, #0ea5e9); }
+      .screen-main { padding: 36px; background: #f8fbff; }
+      .screen-head { display: flex; justify-content: space-between; align-items: start; gap: 30px; margin-bottom: 28px; }
+      .screen-head small { color: #64748b; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
+      .screen-head h1 { margin: 8px 0 0; font-size: 44px; line-height: 1.08; }
+      .screen-actions { display: flex; gap: 12px; }
+      .screen-actions span { width: 150px; height: 48px; border-radius: 999px; background: white; border: 1px solid #dfe7f2; }
+      .screen-actions span:last-child { background: linear-gradient(135deg, var(--screen-a, #2563eb), var(--screen-b, #0ea5e9)); border: 0; }
+      .screen-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 22px; }
+      .screen-metric { min-height: 126px; border: 1px solid #e2e8f0; border-radius: 18px; background: white; padding: 22px; }
+      .screen-metric span { color: #64748b; font-size: 18px; }
+      .screen-metric strong { display: block; margin-top: 22px; font-size: 30px; }
+      .screen-body { display: grid; grid-template-columns: 1.1fr .9fr; gap: 22px; }
+      .screen-chart, .screen-table, .screen-panel { border: 1px solid #e2e8f0; border-radius: 20px; background: white; }
+      .screen-chart { min-height: 326px; padding: 28px; display: flex; gap: 16px; align-items: end; }
+      .screen-chart span { flex: 1; border-radius: 12px 12px 0 0; background: linear-gradient(180deg, var(--screen-a, #2563eb), var(--screen-b, #0ea5e9)); opacity: .92; }
+      .screen-chart span:nth-child(1){height:44%}.screen-chart span:nth-child(2){height:76%}.screen-chart span:nth-child(3){height:58%}.screen-chart span:nth-child(4){height:86%}.screen-chart span:nth-child(5){height:66%}.screen-chart span:nth-child(6){height:92%}
+      .screen-panel { min-height: 326px; padding: 28px; }
+      .screen-panel h2 { margin: 0 0 20px; font-size: 28px; }
+      .screen-list { display: grid; gap: 14px; }
+      .screen-list span { min-height: 48px; border-radius: 13px; background: #eef4ff; border: 1px solid #dfe7f2; display: flex; align-items: center; padding: 0 16px; font-size: 18px; font-weight: 700; color: #334155; }
+      .screen-table { grid-column: 1 / -1; min-height: 164px; padding: 22px; display: grid; gap: 12px; }
+      .screen-table span { height: 34px; border-radius: 999px; background: #e2e8f0; }
+      .screen-table span:nth-child(2) { width: 82%; }
+      .screen-table span:nth-child(3) { width: 68%; }
+    </style>
+  </head>
+  <body>
+    <div class="canvas cover" data-mode="cover">
+      <div class="brand"><img src="inovtek-logo-mark.svg" alt="" /><b>inovtek</b></div>
+      <h1 class="title">Inovtek LMS<br />E-Learning</h1>
+      <p class="subtitle">Plugin WordPress E-Learning tercanggih dan terlengkap untuk menjual course dan pembelajaran online.</p>
+      <div class="logo-row"><span class="logo-pill">WordPress</span><span class="logo-pill">Elementor</span><span class="logo-pill">LMS System</span></div>
+      <div class="ui-stack">
+        <div class="browser"><div class="hero-img"></div><div class="white-card"></div><div class="white-card two"></div></div>
+        <div class="phone"><div class="phone-screen"><div class="phone-line"></div><div class="phone-card"></div><div class="phone-line"></div><div class="phone-line"></div></div></div>
+        <div class="feature-badge a">Checkout System</div>
+        <div class="feature-badge b">Live Course Area</div>
+        <div class="feature-badge c">Course Builder</div>
+      </div>
+    </div>
+    <div class="canvas dashboard" data-mode="dashboard">
+      <div class="dash-shell">
+        <aside class="sidebar"><div class="side-logo">inovtek LMS</div><div class="side-nav"><span></span><span></span><span></span><span></span><span></span></div></aside>
+        <main class="dash-main"><div class="dash-head"><h1>Course Analytics</h1><div class="search"></div></div><div class="stats"><div class="stat"><span>Students</span><b>12.8k</b></div><div class="stat"><span>Courses</span><b>286</b></div><div class="stat"><span>Orders</span><b>4.1k</b></div><div class="stat"><span>Rating</span><b>4.9</b></div></div><div class="chart"><span></span><span></span><span></span><span></span><span></span><span></span></div></main>
+      </div>
+    </div>
+    <div class="canvas features" data-mode="features">
+      <h1 class="feature-title">Satu plugin untuk membangun platform kursus online lengkap</h1>
+      <div class="feature-grid">
+        <div class="feature"><div class="dot"></div><strong>Course Builder</strong><p>Buat modul, lesson, quiz, file, dan video dari satu dashboard.</p></div>
+        <div class="feature"><div class="dot"></div><strong>Payment Ready</strong><p>Checkout, subscription, promosi, dan order management siap dipakai.</p></div>
+        <div class="feature"><div class="dot"></div><strong>Teacher System</strong><p>Kelola mentor, revenue sharing, review, dan halaman publik.</p></div>
+        <div class="feature"><div class="dot"></div><strong>Certificate</strong><p>Generate sertifikat otomatis untuk peserta yang menyelesaikan course.</p></div>
+        <div class="feature"><div class="dot"></div><strong>Affiliate</strong><p>Program afiliasi internal dengan tracking performa dan komisi.</p></div>
+        <div class="feature"><div class="dot"></div><strong>Analytics</strong><p>Laporan student, course, transaksi, dan progres belajar secara real-time.</p></div>
+      </div>
+    </div>
+    <div class="canvas screen" data-mode="screen">
+      <div class="screen-shell">
+        <aside class="screen-sidebar">
+          <div class="screen-logo"><img src="inovtek-logo-mark.svg" alt="" />inovtek LMS</div>
+          <div class="screen-nav"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </aside>
+        <main class="screen-main">
+          <div class="screen-head">
+            <div>
+              <small data-screen-kicker>Dashboard</small>
+              <h1 data-screen-title>Course Analytics</h1>
+            </div>
+            <div class="screen-actions"><span></span><span></span></div>
+          </div>
+          <div class="screen-metrics" data-screen-metrics></div>
+          <div class="screen-body">
+            <div class="screen-chart"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="screen-panel">
+              <h2 data-screen-panel-title>Active Modules</h2>
+              <div class="screen-list" data-screen-list></div>
+            </div>
+            <div class="screen-table"><span></span><span></span><span></span></div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <div class="canvas icon" data-mode="icon"><strong>LMS</strong></div>
+    <script>
+      const params = new URLSearchParams(location.search);
+      const mode = params.get("mode") || "cover";
+      const screens = [
+        ["Course Analytics", "Dashboard", ["12.8k Students", "286 Courses", "4.1k Orders", "4.9 Rating"], ["Course Sales", "Student Progress", "Completion Rate", "Top Lessons"], ["#2563eb", "#0ea5e9"]],
+        ["Course Builder", "Builder", ["48 Drafts", "16 Categories", "92 Lessons", "8 Mentors"], ["Module Editor", "Lesson Preview", "Drip Content", "File Manager"], ["#12b981", "#0ea5e9"]],
+        ["Learning Area", "Student UI", ["78% Avg Progress", "1.9k Active", "42 Live Classes", "312 Tasks"], ["Video Lesson", "Progress Card", "Student Notes", "Next Lesson"], ["#7c3aed", "#60a5fa"]],
+        ["Quiz Manager", "Assessment", ["520 Attempts", "87% Passed", "34 Questions", "12 Banks"], ["Question Bank", "Passing Grade", "Timer Rules", "Result Report"], ["#1598f7", "#38bdf8"]],
+        ["Certificate Studio", "Certificate", ["1.2k Issued", "9 Templates", "100% Verified", "24 Batches"], ["Template Canvas", "Auto Number", "QR Validation", "Download PDF"], ["#f59e0b", "#2563eb"]],
+        ["Checkout Flow", "Commerce", ["4 Gateways", "38 Coupons", "2.4k Paid", "15 Bundles"], ["Cart Summary", "Coupon Engine", "Invoice Page", "Payment Status"], ["#0ea5e9", "#22c55e"]],
+        ["Subscription Plans", "Membership", ["6 Plans", "930 Members", "72 Renewals", "14 Trials"], ["Plan Builder", "Access Rules", "Renewal Reminder", "Member Badge"], ["#2563eb", "#8b5cf6"]],
+        ["Affiliate Center", "Referral", ["318 Partners", "9.8k Clicks", "Rp18m Comm", "61 Sales"], ["Referral Links", "Commission Rules", "Payout Queue", "Partner Report"], ["#16a34a", "#f59e0b"]],
+        ["Teacher Revenue", "Mentor", ["24 Teachers", "Rp42m Share", "96 Courses", "18 Pending"], ["Mentor Wallet", "Revenue Split", "Course Owner", "Payout Report"], ["#0f172a", "#2563eb"]],
+        ["Student Directory", "Users", ["12.8k Users", "2.1k Active", "384 Groups", "99% Synced"], ["Student Profile", "Group Access", "Progress Log", "Activity Feed"], ["#38bdf8", "#7c3aed"]],
+        ["Order Dashboard", "Orders", ["4.1k Orders", "Rp126m Revenue", "3 Refunds", "98% Paid"], ["Order List", "Manual Invoice", "Payment Log", "Export CSV"], ["#ef4444", "#f97316"]],
+        ["Course Catalog", "Catalog", ["286 Courses", "31 Bundles", "11 Featured", "5 Levels"], ["Course Card", "Filter Level", "Bundle Display", "SEO Fields"], ["#2563eb", "#22c55e"]],
+        ["Video Protection", "Security", ["812 Videos", "99% Private", "21 Sources", "3 Rules"], ["Embed Guard", "Domain Rules", "Watermark", "Access Token"], ["#041f3d", "#1598f7"]],
+        ["Import Demo", "Setup", ["8 Demos", "4 Layouts", "2 Minutes", "100% Ready"], ["Layout Import", "Sample Course", "Default Pages", "Setup Checklist"], ["#8b5cf6", "#06b6d4"]],
+        ["Elementor Blocks", "Builder", ["32 Widgets", "14 Sections", "8 Headers", "10 Footers"], ["Course Grid", "Mentor Card", "Checkout Box", "Progress Bar"], ["#ec4899", "#2563eb"]],
+        ["Email Automation", "Notification", ["21 Templates", "98% Sent", "6 Triggers", "3 Channels"], ["Welcome Email", "Course Reminder", "Payment Notice", "Certificate Mail"], ["#0ea5e9", "#f97316"]],
+        ["Report Center", "Report", ["18 Reports", "7 Exports", "4 Charts", "30 Days"], ["Sales Report", "Student Report", "Course Report", "Mentor Report"], ["#14b8a6", "#2563eb"]],
+        ["License Manager", "License", ["3 Plans", "26 Active", "4 Expiring", "1 Domain"], ["Activation Key", "Domain Limit", "Update Access", "Renewal Status"], ["#334155", "#0ea5e9"]],
+        ["System Settings", "Settings", ["12 Menus", "40 Options", "5 Roles", "9 Rules"], ["Role Access", "Theme Options", "Payment Setup", "General Config"], ["#041f3d", "#1598f7"]]
+      ];
+      const selected = screens[(Number(params.get("screen") || 1) - 1 + screens.length) % screens.length];
+      document.documentElement.style.setProperty("--screen-a", selected[4][0]);
+      document.documentElement.style.setProperty("--screen-b", selected[4][1]);
+      document.querySelector("[data-screen-title]").textContent = selected[0];
+      document.querySelector("[data-screen-kicker]").textContent = selected[1];
+      document.querySelector("[data-screen-metrics]").innerHTML = selected[2].map((item) => {
+        const [value, ...label] = item.split(" ");
+        return `<div class="screen-metric"><span>${label.join(" ")}</span><strong>${value}</strong></div>`;
+      }).join("");
+      document.querySelector("[data-screen-list]").innerHTML = selected[3].map((item) => `<span>${item}</span>`).join("");
+      document.querySelectorAll("[data-mode]").forEach((el) => {
+        el.style.display = el.dataset.mode === mode ? "" : "none";
+      });
+    </script>
+  </body>
+</html>

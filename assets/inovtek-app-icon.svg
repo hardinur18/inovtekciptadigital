@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="Logo V4 Tip Fixed">
+  <title>Logo V4 Tip Fixed</title>
+  <desc>Logo mark rebuilt as clean vector. V4 refines the blue roof endpoint and keeps consistent visual widths.</desc>
+  <rect x="10" y="4" width="236" height="248" rx="45" ry="45" fill="#031A3C"/>
+  <path d="M 132 48 L 68 89 L 68 169 L 94 188 L 94 170 L 86 164 L 86 99 L 132 66 Z" fill="#FFFFFF"/>
+  <path d="M 103 112 L 121 112 L 121 198 L 103 188 Z" fill="#FFFFFF"/>
+  <path d="M 132 112 L 199 112 L 199 130 L 170 130 L 170 188 L 152 198 L 152 130 L 132 130 Z" fill="#FFFFFF"/>
+  <path d="M 132 48 L 197 84 L 197 101 L 132 65 Z" fill="#047BEE"/>
+</svg>
