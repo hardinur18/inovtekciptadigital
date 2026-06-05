@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Lalu buka `http://127.0.0.1:3000/#home`.
+Lalu buka `http://127.0.0.1:5173/#home`.
 
 ## Build
 
